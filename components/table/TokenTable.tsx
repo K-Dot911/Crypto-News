@@ -14,42 +14,54 @@ import {
 
 export function TokenTable({ data }: { data: SolanaToken[] }) {
 	return (
-		<div className="overflow-x-auto rounded-2xl shadow-md border border-gray-200 dark:border-gray-700">
+		<div className="overflow-x-auto rounded-2xl shadow-xl border border-gray-800 bg-gray-500/70 backdrop-blur">
 			<Table>
 				<TableHeader>
-					<TableRow className="bg-gray-100 dark:bg-gray-800">
-						<TableHead className="px-4 py-3 font-semibold text-gray-700 dark:text-gray-200">
+					<TableRow className="bg-gray-700/80">
+						<TableHead className="px-4 py-3 font-semibold text-gray-300 uppercase tracking-wide">
 							Logo
 						</TableHead>
-						<TableHead>Name</TableHead>
-						<TableHead>Symbol</TableHead>
-						<TableHead>Price (USD)</TableHead>
+						<TableHead className="text-gray-300">Name</TableHead>
+						<TableHead className="text-gray-300">Symbol</TableHead>
+						<TableHead className="text-gray-300 text-right">
+							Price (USD)
+						</TableHead>
+						<TableHead className="text-gray-300 text-center">Action</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
 					{data.map((token) => (
-						<TableRow key={token.id} className="transition-colors">
+						<TableRow
+							key={token.id}
+							className="hover:bg-gray-800/60 transition-colorss"
+						>
 							<TableCell>
 								<Image
 									src={token.image}
 									alt={token.name}
-									width={24}
-									height={24}
+									width={28}
+									height={28}
+									className="rounded-full"
 								/>
 							</TableCell>
-							<TableCell className="font-medium text-gray-900 dark:text-gray-100">
+							<TableCell className="font-medium text-gray-100">
 								{token.name}
 							</TableCell>
-							<TableCell className="uppercase font-medium text-gray-900 dark:text-gray-100">
+							<TableCell className="uppercase text-gray-400">
 								{token.symbol}
 							</TableCell>
-							<TableCell className="text-green-600 dark:text-green-400 font-semibold">
-								${token.circulating_supply.toLocaleString()}
+							<TableCell className="text-green-400 font-semibold text-right">
+								{token.current_price.toLocaleString("en-US", {
+									style: "currency",
+									currency: "USD",
+									minimumFractionDigits: 2,
+									maximumFractionDigits: 8,
+								})}
 							</TableCell>
-							<TableCell>
+							<TableCell className="text-center">
 								<Link
-									href={`/token/${token.id}`}
-									className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
+									href={`/tokens/${token.id}`}
+									className="text-blue-500 hover:text-blue-400 font-medium"
 								>
 									View
 								</Link>

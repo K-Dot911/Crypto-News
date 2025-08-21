@@ -6,14 +6,12 @@ const DELAY = 60000;
 
 export const useTokens = () => {
 	const [tokens, setTokens] = useState<SolanaToken[]>([]);
-	const [loading, setLoading] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string>("");
 
 	async function fetchTokens() {
 		try {
-			setLoading(true);
 			const data: SolanaToken[] = await getSolanaTokens();
-			console.log(`4444444444444444444`, data);
 			setTokens(data);
 		} catch (error: unknown) {
 			if (error instanceof Error) {

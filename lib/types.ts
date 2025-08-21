@@ -3,7 +3,7 @@ export interface SolanaToken {
 	name: string;
 	symbol: string;
 	image: string;
-	circulating_supply: number;
+	current_price: number;
 }
 export interface ApiError {
 	message: string;
